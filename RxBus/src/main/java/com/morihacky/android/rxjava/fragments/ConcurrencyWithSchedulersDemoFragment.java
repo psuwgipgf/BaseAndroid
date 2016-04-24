@@ -100,7 +100,7 @@ public class ConcurrencyWithSchedulersDemoFragment
             public void onCompleted() {
                 _log("On complete");
                 _progress.setVisibility(View.INVISIBLE);
-            }
+        }
 
             @Override
             public void onError(Throwable e) {

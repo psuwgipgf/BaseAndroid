@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -19,7 +20,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import rx.Observable;
+import rx.Observer;
 import rx.Subscriber;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.observers.Observers;
 
 public class LauncherActivyt extends Activity {
 
@@ -45,6 +50,35 @@ public class LauncherActivyt extends Activity {
         list=(ListView)findViewById(R.id.list);
         initList();
         list.setAdapter(new MyAdapter());
+        Observer observer=new Observer() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+                Log.e("psuwgipgf",o.toString());
+            }
+        };
+        Observable observable= Observable.create(new Observable.OnSubscribe<String>(){
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext("asdfasdf");
+            }
+        });
+        observable.subscribe(observer);
+        observable.subscribe(new Action1() {
+            @Override
+            public void call(Object o) {
+                Log.e("psuwgipgf",o.toString());
+            }
+        });
 
     }
 
