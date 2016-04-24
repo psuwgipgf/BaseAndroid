@@ -4,6 +4,7 @@ package com.psuwgipgf.myapplication.model.api;
 import android.nfc.Tag;
 
 import com.libvirus.okhttplib.OkHttpManager;
+import com.libvirus.okhttplib.request.OkHttpRequest;
 
 import java.io.IOException;
 import java.util.Map;
@@ -27,7 +28,6 @@ public class ApiHelper {
     }
 
     public static Response get(String url, Map<String, String> params) {
-        String result = "";
         Response response = OkHttpManager.getRequest().url(url).setParams(params).exec();
         return response;
     }

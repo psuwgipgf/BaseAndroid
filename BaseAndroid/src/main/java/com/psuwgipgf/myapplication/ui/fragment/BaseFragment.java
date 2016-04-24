@@ -1,4 +1,4 @@
-package com.psuwgipgf.myapplication.ui.adapter;
+package com.psuwgipgf.myapplication.ui.fragment;
 
 import android.app.Fragment;
 

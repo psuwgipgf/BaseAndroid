@@ -62,7 +62,7 @@ public class GetRequest extends OkHttpRequest {
     @Override
     public OkHttpRequest setParams(Map<String, String> p) {
         mParams = p;
-        return null;
+        return this;
     }
 
     @Override
