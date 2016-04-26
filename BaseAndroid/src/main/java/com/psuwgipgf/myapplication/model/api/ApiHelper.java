@@ -32,5 +32,10 @@ public class ApiHelper {
         return response;
     }
 
+    public static Response post(String url, Map<String, String> params) {
+        Response response = OkHttpManager.postRequest().url(url).setParams(params).exec();
+        return response;
+    }
+
 
 }

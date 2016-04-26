@@ -1,6 +1,9 @@
 package com.psuwgipgf.myapplication.eventbus;
 
+import android.util.Log;
+
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.subjects.PublishSubject;
 import rx.subjects.SerializedSubject;
@@ -11,13 +14,13 @@ import rx.subjects.Subject;
  */
 public class RxBus {
 
-    private static final Subject mSubject = new SerializedSubject(PublishSubject.create());
+    private static final Subject<RxBusType,RxBusType> mSubject = new SerializedSubject(PublishSubject.create());
 
     public static void send(RxBusType o) {
         mSubject.onNext(o);
     }
 
-    public static Observable toObservable(final int... type) {
+    public static Observable<RxBusType> toObservable(final int... type) {
         return mSubject.filter(new Func1<RxBusType, Boolean>() {
 
             @Override
@@ -32,7 +35,7 @@ public class RxBus {
         });
     }
 
-    public static Observable<Object> toObservable() {
+    public static Observable<RxBusType> toObservable() {
         return mSubject;
     }
 
