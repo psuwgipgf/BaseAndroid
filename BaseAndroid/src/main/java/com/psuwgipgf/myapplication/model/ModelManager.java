@@ -66,7 +66,29 @@ public class ModelManager {
                 return null;
             }
         }).subscribeOn(Schedulers.io());
+    }
 
+    public static Observable<String> apiPostFile(final String url, final Map<String, Object> params) {
+        return Observable.create(new Observable.OnSubscribe<Response>() {
+
+            @Override
+            public void call(Subscriber<? super Response> o) {
+                o.onNext(ApiHelper.postFile(url, params));
+            }
+        }).map(new Func1<Response, String>() {
+            @Override
+            public String call(Response o) {
+                if (o != null) {
+                    try {
+                        return o.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                RxBus.send(new RxBusType(RxBusType.NETWORK_STATUS));
+                return null;
+            }
+        }).subscribeOn(Schedulers.io());
     }
 
 

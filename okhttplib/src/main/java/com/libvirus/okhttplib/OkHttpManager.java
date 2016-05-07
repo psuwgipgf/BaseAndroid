@@ -1,6 +1,7 @@
 package com.libvirus.okhttplib;
 
 import com.libvirus.okhttplib.request.GetRequest;
+import com.libvirus.okhttplib.request.PostFileRequest;
 import com.libvirus.okhttplib.request.PostRequest;
 import com.libvirus.okhttplib.utils.LogHelper;
 
@@ -37,8 +38,8 @@ public class OkHttpManager {
             //默认OkHttpClient;
             mOkHttpClient = new OkHttpClient().newBuilder()
                     .connectTimeout(1l, TimeUnit.MINUTES)
-                    .readTimeout(1l,TimeUnit.MINUTES)
-                    .writeTimeout(1l,TimeUnit.MINUTES)
+                    .readTimeout(1l, TimeUnit.MINUTES)
+                    .writeTimeout(1l, TimeUnit.MINUTES)
                     .build();
         }
     }
@@ -90,5 +91,9 @@ public class OkHttpManager {
 
     public static PostRequest postRequest() {
         return new PostRequest();
+    }
+
+    public static PostFileRequest postFileRequest() {
+        return new PostFileRequest();
     }
 }

@@ -22,23 +22,8 @@ public abstract class OkHttpRequest {
     public Request request;
     public Call call;
     public String url;
-    public String tag;
-    public Map<String, String> mHeader;
     public Map<String, String> mParams;
 
-    public abstract OkHttpRequest host(String u);
-
-    public abstract OkHttpRequest url(String u);
-
-    public abstract OkHttpRequest tag(String u);
-
-    public abstract OkHttpRequest addHeader(String k, String v);
-
-    public abstract OkHttpRequest setHeader(Map<String, String> p);
-
-    public abstract OkHttpRequest addParams(String k, String v);
-
-    public abstract OkHttpRequest setParams(Map<String, String> p);
     protected abstract void build();
 
     public boolean cancel() {
@@ -50,7 +35,7 @@ public abstract class OkHttpRequest {
     }
 
     private void executive() {
-        if(request==null){
+        if (request == null) {
             build();
         }
         call = mOkHttpClient.newCall(request);

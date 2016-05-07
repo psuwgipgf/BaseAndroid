@@ -45,7 +45,7 @@ public class BaseActivity extends FragmentActivity {
     }
 
     protected void netWorkStatus() {
-       
+
     }
 
 

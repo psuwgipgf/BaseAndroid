@@ -2,6 +2,8 @@ package com.psuwgipgf.myapplication.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,6 +26,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        Handler handler=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                msg.getTarget().getLooper();
+            }
+        };
+
     }
 
     @OnClick(R.id.button2)

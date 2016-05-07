@@ -11,46 +11,46 @@ import okhttp3.Request;
  */
 public class GetRequest extends OkHttpRequest {
 
+    private Request.Builder builder;
 
+    public GetRequest(){
+        builder= new Request.Builder()
+                .get();
+    }
     public GetRequest setOkHttpClient(OkHttpClient p) {
         mOkHttpClient = p;
         return this;
     }
 
-    @Override
     public GetRequest host(String u) {
         host = u;
         return this;
     }
 
-    @Override
     public GetRequest url(String u) {
         url = u;
         return this;
     }
 
-    @Override
     public GetRequest tag(String u) {
-        tag = u;
+        builder.tag(u);
         return this;
     }
 
-    @Override
     public GetRequest addHeader(String k, String v) {
-        if (mHeader == null) {
-            mHeader = new LinkedHashMap<>();
-        }
-        mHeader.put(k, v);
+        builder.addHeader(k, v);
         return this;
     }
 
-    @Override
     public GetRequest setHeader(Map<String, String> p) {
-        mHeader = p;
+        if(p!=null){
+            for(String key:p.keySet()){
+                builder.header(key,p.get(key));
+            }
+        }
         return this;
     }
 
-    @Override
     public GetRequest addParams(String k, String v) {
         if (mParams == null) {
             mParams = new LinkedHashMap<>();
@@ -59,7 +59,6 @@ public class GetRequest extends OkHttpRequest {
         return this;
     }
 
-    @Override
     public OkHttpRequest setParams(Map<String, String> p) {
         mParams = p;
         return this;
@@ -68,13 +67,6 @@ public class GetRequest extends OkHttpRequest {
     @Override
     protected void build() {
         StringBuilder sb= new StringBuilder(host + url);
-        Request.Builder builder = new Request.Builder()
-                .tag(tag)
-                .get();
-        if (mHeader != null)
-            for (String key : mHeader.keySet()) {
-                builder.addHeader(key, mHeader.get(key));
-            }
         if (mParams != null) {
             sb.append("?");
             for (String key : mParams.keySet()) {
@@ -84,7 +76,6 @@ public class GetRequest extends OkHttpRequest {
         }
         builder.url(sb.toString());
         request = builder.build();
-
     }
 
 
