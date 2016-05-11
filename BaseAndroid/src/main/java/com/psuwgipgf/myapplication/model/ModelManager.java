@@ -1,10 +1,13 @@
 package com.psuwgipgf.myapplication.model;
 
+import android.content.Context;
+
 import com.psuwgipgf.myapplication.eventbus.RxBus;
 import com.psuwgipgf.myapplication.eventbus.RxBusType;
 import com.psuwgipgf.myapplication.model.api.ApiHelper;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Response;
@@ -18,8 +21,8 @@ import rx.schedulers.Schedulers;
  */
 public class ModelManager {
 
+    public static void initModelManager(Context context) {
 
-    public ModelManager() {
     }
 
     public static Observable<String> apiGet(final String url, final Map<String, String> params) {
@@ -68,12 +71,13 @@ public class ModelManager {
         }).subscribeOn(Schedulers.io());
     }
 
-    public static Observable<String> apiPostFile(final String url, final Map<String, Object> params) {
+    public static Observable<String> apiPostFile(final String url, final Map<String, Object> params,
+                                                 final String arrkey, final List<Object> arr) {
         return Observable.create(new Observable.OnSubscribe<Response>() {
 
             @Override
             public void call(Subscriber<? super Response> o) {
-                o.onNext(ApiHelper.postFile(url, params));
+                o.onNext(ApiHelper.postFile(url, params, arrkey, arr));
             }
         }).map(new Func1<Response, String>() {
             @Override

@@ -5,6 +5,7 @@ package com.psuwgipgf.myapplication.model.api;
  */
 public interface UrlInterface {
     String HOST = "http://192.168.0.100:5000";
+//    String HOST = "";
 
 
 }

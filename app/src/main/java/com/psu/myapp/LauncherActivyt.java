@@ -28,14 +28,16 @@ import rx.observers.Observers;
 
 public class LauncherActivyt extends Activity {
 
-    private final int SIZE=100;
+    private final int SIZE = 100;
     private ListView list;
     private Context mContext;
     private List<String> mList;
-    @Override @SuppressWarnings("NewApi")
+
+    @Override
+    @SuppressWarnings("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Window window=getWindow();
+        Window window = getWindow();
 //        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -45,12 +47,12 @@ public class LauncherActivyt extends Activity {
 //        if(mChildView!=null){
 //            ViewCompat.setFitsSystemWindows(mChildView,false);
 //        }
-        mContext=this;
+        mContext = this;
         setContentView(R.layout.activity_launcher_activyt);
-        list=(ListView)findViewById(R.id.list);
+        list = (ListView) findViewById(R.id.list);
         initList();
         list.setAdapter(new MyAdapter());
-        Observer observer=new Observer() {
+        Observer observer = new Observer() {
             @Override
             public void onCompleted() {
 
@@ -63,33 +65,34 @@ public class LauncherActivyt extends Activity {
 
             @Override
             public void onNext(Object o) {
-                Log.e("psuwgipgf",o.toString());
+                Log.e("psuwgipgf", o.toString());
             }
         };
-        Observable observable= Observable.create(new Observable.OnSubscribe<String>(){
+        Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
-                subscriber.onNext("asdfasdf");
+                subscriber.onNext("asdf");
             }
         });
         observable.subscribe(observer);
         observable.subscribe(new Action1() {
             @Override
             public void call(Object o) {
-                Log.e("psuwgipgf",o.toString());
+                Log.e("psuwgipgf", getExternalCacheDir().getAbsolutePath());
             }
         });
 
     }
 
-    private void initList(){
-        String[] list={"ActivityAnimaction","ActivityImage","MainActivity",
-                "ViewPageActivity","PropertyActivity","Observable"
+    private void initList() {
+        String[] list = {"ActivityAnimaction", "ActivityImage", "MainActivity",
+                "ViewPageActivity", "PropertyActivity", "Observable"
 
         };
-        mList= Arrays.asList(list);
+        mList = Arrays.asList(list);
     }
-    class MyAdapter extends BaseAdapter{
+
+    class MyAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -108,16 +111,16 @@ public class LauncherActivyt extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view=View.inflate(mContext,R.layout.launcher_activity_item,null);
-            Button bu=(Button)view.findViewById(R.id.button);
-            final String activity=mList.get(position);
+            View view = View.inflate(mContext, R.layout.launcher_activity_item, null);
+            Button bu = (Button) view.findViewById(R.id.button);
+            final String activity = mList.get(position);
             bu.setText(activity);
-            final Integer i=Color.parseColor("#ff00dd");
+            final Integer i = Color.parseColor("#ff00dd");
             bu.setBackgroundColor(i);
             bu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent in =new Intent(activity);
+                    Intent in = new Intent(activity);
                     startActivity(in);
                 }
             });

@@ -3,6 +3,7 @@ package com.psuwgipgf.myapplication.model.api;
 
 import com.libvirus.okhttplib.OkHttpManager;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Response;
@@ -33,8 +34,9 @@ public class ApiHelper {
         return response;
     }
 
-    public static Response postFile(String url, Map<String, Object> p) {
-        Response response = OkHttpManager.postFileRequest().url(url).setParam(p).exec();
+    public static Response postFile(String url, Map<String, Object> p, String arrkey, List<Object> arr) {
+
+        Response response = OkHttpManager.postFileRequest().url(url).setParam(p).addParams(arrkey, arr).exec();
         return response;
     }
 

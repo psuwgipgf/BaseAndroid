@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/RxBus/RxBus.iml" filepath="$PROJECT_DIR$/RxBus/RxBus.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/okhttplib/okhttplib.iml" filepath="$PROJECT_DIR$/okhttplib/okhttplib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/seeWeather/seeWeather.iml" filepath="$PROJECT_DIR$/seeWeather/seeWeather.iml" />
     </modules>
   </component>
 </project>

@@ -13,7 +13,6 @@
             <option value="$PROJECT_DIR$/RxBus" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/okhttplib" />
-            <option value="$PROJECT_DIR$/seeWeather" />
           </set>
         </option>
         <option name="myModules">
@@ -23,7 +22,6 @@
             <option value="$PROJECT_DIR$/RxBus" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/okhttplib" />
-            <option value="$PROJECT_DIR$/seeWeather" />
           </set>
         </option>
       </GradleProjectSettings>

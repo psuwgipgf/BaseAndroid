@@ -89,9 +89,9 @@ public class PostFileRequest extends OkHttpRequest {
         return this;
     }
 
-    public PostFileRequest addParams(String key, List<Objects> p) {
+    public PostFileRequest addParams(String key, List<Object> p) {
         if (p != null) {
-            for (Objects item : p) {
+            for (Object item : p) {
                 addParam(key, item);
             }
         }

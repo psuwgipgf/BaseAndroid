@@ -1,17 +1,17 @@
 package com.psuwgipgf.myapplication.presenter;
 
-import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
 import com.psuwgipgf.myapplication.model.ModelManager;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import rx.Subscriber;
@@ -22,8 +22,8 @@ import rx.android.schedulers.AndroidSchedulers;
  */
 public class MainActivityPresenter {
 
-    public void isFile(View v) {
-        File file = new File(v.getContext().getCacheDir(), "123.txt");
+    public void isFile(View v,String filename) {
+        File file = new File(v.getContext().getCacheDir(), filename);
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -37,10 +37,6 @@ public class MainActivityPresenter {
             fos = new FileOutputStream(file.getAbsolutePath());
             fos.write("asdfasdfasdfasdfasdf".getBytes());
             fos.close();
-            FileInputStream fis = new FileInputStream(file);
-            byte[] arr = new byte[1024];
-            fis.read(arr);
-            tem = new String(arr);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -60,10 +56,13 @@ public class MainActivityPresenter {
     }
 
     public void setTextView(final TextView view) {
-        isFile(view);
+        isFile(view,"123.txt");
+        isFile(view,"abc.txt");
+        List<Object>files=new ArrayList<>();
+        files.add(new File(view.getContext().getCacheDir(), "123.txt"));
+        files.add(new File(view.getContext().getCacheDir(), "abc.txt"));
         Map<String, Object> params = new HashMap();
         params.put("arr", "1");
-        params.put("text", new File(view.getContext().getCacheDir(), "123.txt"));
 //        ModelManager.apiGet("/", params)
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribe(new Action1<String>() {
@@ -90,7 +89,7 @@ public class MainActivityPresenter {
 //                        view.setText(s);
 //                    }
 //                });
-        ModelManager.apiPostFile("/", params)
+        ModelManager.apiPostFile("/", params,"text",files)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<String>() {
                     @Override
