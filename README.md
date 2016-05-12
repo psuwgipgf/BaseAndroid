@@ -3,7 +3,9 @@
 > Android基础项目，MVP结构
 
 ## 用法
-    
+* Android Studio 直接导入整个project 或者导入BaseAndroid module
+* Eclipse 导入BaseAndroid/BaseAndroid/app/目录下的工程
+
     
 
 ## 支持的功能
