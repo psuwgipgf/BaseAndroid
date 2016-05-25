@@ -21,8 +21,7 @@ public class LogHelper implements Interceptor {
         tag = TAG;
     }
 
-    public LogHelper(String t) {
-        this();
+	public LogHelper(String t) {
         if (!TextUtils.isEmpty(t)) {
             tag = t;
         }
