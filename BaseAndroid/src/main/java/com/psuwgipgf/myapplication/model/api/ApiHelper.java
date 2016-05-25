@@ -1,7 +1,13 @@
 package com.psuwgipgf.myapplication.model.api;
 
 
+import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
+
 import com.libvirus.okhttplib.OkHttpManager;
+import com.libvirus.okhttplib.utils.CookieInterface;
 
 import java.util.List;
 import java.util.Map;
@@ -13,15 +19,47 @@ import okhttp3.Response;
  */
 public class ApiHelper {
 
-    static {
-        init();
+    private static Application app;
+    private static String mCookie;
+    private final static String key = "Set-Cookie";//JSESSIONID
+
+    // 初始化
+    public static void init(Application app) {
+        ApiHelper.app = app;
+        OkHttpManager.getInstace().host(UrlInterface.HOST).log("psuwgipgf")
+                .setCookie(new CookieInterface() {
+
+                    @Override
+                    public void saveCookie(String cookie) {
+                        setCookie(cookie);
+                    }
+
+                    @Override
+                    public String getKey() {
+                        return key;
+                    }
+
+                    @Override
+                    public String getCookie() {
+                        return getSharedPreCookie();
+                    }
+                });
     }
 
-    //初始化
-    private static void init() {
-        OkHttpManager.getInstace()
-                .host(UrlInterface.HOST)
-                .log("psuwgipgf");
+    private static String getSharedPreCookie() {
+        if (TextUtils.isEmpty(mCookie)) {
+            SharedPreferences sp = app.getSharedPreferences("_cookie",
+                    Context.MODE_PRIVATE);
+            mCookie=sp.getString(key,"");
+        }
+        return mCookie;
+    }
+
+    private static void setCookie(String str) {
+        SharedPreferences sp = app.getSharedPreferences("_cookie",
+                Context.MODE_PRIVATE);
+        sp.edit().putString(key,str).commit();
+        mCookie=str;
     }
 
     public static Response get(String url, Map<String, String> params) {

@@ -25,85 +25,86 @@ import rx.schedulers.Schedulers;
  */
 public class ModelManager {
 
-	public static void initModelManager(Application context) {
-		SharedPreferencesUtil.init(context);
-	}
+    public static void initModelManager(Application context) {
+        SharedPreferencesUtil.init(context);
+        ApiHelper.init(context);
+    }
 
-	public static Observable<String> apiGet(final String url,
-			final Map<String, String> params) {
-		return Observable.create(new Observable.OnSubscribe<Response>() {
+    public static Observable<String> apiGet(final String url,
+                                            final Map<String, String> params) {
+        return Observable.create(new Observable.OnSubscribe<Response>() {
 
-			@Override
-			public void call(Subscriber<? super Response> o) {
-				o.onNext(ApiHelper.get(url, params));
-			}
-		}).map(new Func1<Response, String>() {
-			@Override
-			public String call(Response o) {
-				if (o != null) {
-					try {
-						return o.body().string();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				RxBus.send(new RxBusType(RxBusType.NETWORK_STATUS));
-				return null;
-			}
-		}).subscribeOn(Schedulers.io());
-	}
+            @Override
+            public void call(Subscriber<? super Response> o) {
+                o.onNext(ApiHelper.get(url, params));
+            }
+        }).map(new Func1<Response, String>() {
+            @Override
+            public String call(Response o) {
+                if (o != null) {
+                    try {
+                        return o.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                RxBus.send(new RxBusType(RxBusType.NETWORK_STATUS));
+                return null;
+            }
+        }).subscribeOn(Schedulers.io());
+    }
 
-	public static Observable<String> apiPost(final String url,
-			final Map<String, String> params) {
-		return Observable.create(new Observable.OnSubscribe<Response>() {
+    public static Observable<String> apiPost(final String url,
+                                             final Map<String, String> params) {
+        return Observable.create(new Observable.OnSubscribe<Response>() {
 
-			@Override
-			public void call(Subscriber<? super Response> o) {
-				o.onNext(ApiHelper.post(url, params));
-			}
-		}).map(new Func1<Response, String>() {
-			@Override
-			public String call(Response o) {
-				if (o != null) {
-					try {
-						return o.body().string();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				RxBus.send(new RxBusType(RxBusType.NETWORK_STATUS));
-				return null;
-			}
-		}).subscribeOn(Schedulers.io());
-	}
+            @Override
+            public void call(Subscriber<? super Response> o) {
+                o.onNext(ApiHelper.post(url, params));
+            }
+        }).map(new Func1<Response, String>() {
+            @Override
+            public String call(Response o) {
+                if (o != null) {
+                    try {
+                        return o.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                RxBus.send(new RxBusType(RxBusType.NETWORK_STATUS));
+                return null;
+            }
+        }).subscribeOn(Schedulers.io());
+    }
 
-	public static Observable<String> apiPostFile(final String url,
-			final Map<String, Object> params, final String arrkey,
-			final List<Object> arr) {
-		return Observable.create(new Observable.OnSubscribe<Response>() {
+    public static Observable<String> apiPostFile(final String url,
+                                                 final Map<String, Object> params, final String arrkey,
+                                                 final List<Object> arr) {
+        return Observable.create(new Observable.OnSubscribe<Response>() {
 
-			@Override
-			public void call(Subscriber<? super Response> o) {
-				o.onNext(ApiHelper.postFile(url, params, arrkey, arr));
-			}
-		}).map(new Func1<Response, String>() {
-			@Override
-			public String call(Response o) {
-				if (o != null) {
-					try {
-						return o.body().string();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				RxBus.send(new RxBusType(RxBusType.NETWORK_STATUS));
-				return null;
-			}
-		}).subscribeOn(Schedulers.io());
-	}
+            @Override
+            public void call(Subscriber<? super Response> o) {
+                o.onNext(ApiHelper.postFile(url, params, arrkey, arr));
+            }
+        }).map(new Func1<Response, String>() {
+            @Override
+            public String call(Response o) {
+                if (o != null) {
+                    try {
+                        return o.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                RxBus.send(new RxBusType(RxBusType.NETWORK_STATUS));
+                return null;
+            }
+        }).subscribeOn(Schedulers.io());
+    }
 
-	public static void imageLoad(Context c, String url, ImageView view){
-		GlideConfig.load(c, url, view);
-	}
+    public static void imageLoad(Context c, String url, ImageView view) {
+        GlideConfig.load(c, url, view);
+    }
 
 }
