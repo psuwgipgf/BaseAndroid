@@ -22,7 +22,7 @@ public class CookieHelper implements Interceptor {
 	private Request showRequest(Request request) {
 		if (mCookieOpter != null) {
 			return request.newBuilder()
-					.addHeader(mCookieOpter.getKey(), mCookieOpter.getCookie())
+					.addHeader("Cookie", mCookieOpter.getCookie())
 					.build();
 		}
 		return request;
@@ -31,7 +31,7 @@ public class CookieHelper implements Interceptor {
 
 	private void showResponse(Response response) {
 		if(mCookieOpter!=null){
-			String cookie = response.header(mCookieOpter.getKey());
+			String cookie = response.header("Set-Cookie");
 			mCookieOpter.saveCookie(cookie);
 		}
 	}
