@@ -37,4 +37,5 @@ public class UserBean extends SharedPreBean {
     public void setAge(int age) {
         this.age = age;
     }
+
 }

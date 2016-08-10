@@ -18,9 +18,9 @@ import java.util.Map;
 
 public class SharedPreferencesUtil {
 
-    private static final int SAVE_ALL = Modifier.PUBLIC + Modifier.PRIVATE;//保存所有
-    private static final int SAVE_PUBLIC = Modifier.PUBLIC;//保存公共数据
-    private static final int SAVE_PRIVATE = Modifier.PRIVATE;//保存私有数据
+    private static final int OPERATING_ALL = Modifier.PUBLIC + Modifier.PRIVATE;//保存所有
+    private static final int OPERATING_PUBLIC = Modifier.PUBLIC;//保存公共数据
+    private static final int OPERATING_PRIVATE = Modifier.PRIVATE;//保存私有数据
 
 
     public static Application app;
@@ -29,7 +29,7 @@ public class SharedPreferencesUtil {
         app = a;
     }
 
-    static <B> void setSharedPreToBean(Map<String, Object> params, B bean, int Params)
+    static <B> void setSharedPreToBean(Map<String, Object> params, B bean)
             throws IllegalAccessException, IllegalArgumentException {
         Field[] arrField = bean.getClass().getDeclaredFields();
         for (Field f : arrField) {
@@ -53,9 +53,9 @@ public class SharedPreferencesUtil {
         Field[] arrField = bean.getClass().getDeclaredFields();
         for (Field f : arrField) {
             Editor edit = null;
-            if (f.getModifiers() == SAVE_PUBLIC && Params != SAVE_PRIVATE) {
+            if (f.getModifiers() == OPERATING_PUBLIC && Params != OPERATING_PRIVATE) {
                 edit = PublicEdit;
-            } else if (f.getModifiers() == SAVE_PRIVATE && Params != SAVE_PUBLIC) {
+            } else if (f.getModifiers() == OPERATING_PRIVATE && Params != OPERATING_PUBLIC) {
                 edit = PrivateEdit;
                 f.setAccessible(true);
             } else {
@@ -74,31 +74,22 @@ public class SharedPreferencesUtil {
                 edit.putBoolean(f.getName(), (boolean) value);
             }
         }
-        if(PublicEdit!=null){
+        if (PublicEdit != null) {
             PublicEdit.commit();
         }
-        if(PrivateEdit!=null){
+        if (PrivateEdit != null) {
             PrivateEdit.commit();
         }
 
     }
 
-    public static boolean setToBean(String name, SharedPreBean ub,int saveType) {
+    public static boolean setToBean(String name, SharedPreBean ub) {
         Map<String, Object> params = new HashMap<String, Object>();
         SharedPreferences sp = app.getSharedPreferences(name,
                 Context.MODE_PRIVATE);
-        String privateName = ub.getPrivateSharePreFileName();
-        SharedPreferences privateSp = null;
-        if (!TextUtils.isEmpty(privateName)) {
-            privateSp = app.getSharedPreferences(privateName, Context.MODE_PRIVATE);
-            params.putAll(privateSp.getAll());
-        }
         params.putAll(sp.getAll());
         try {
-            setSharedPreToBean(params, ub, Modifier.PUBLIC);
-            if (privateSp != null) {
-                setSharedPreToBean(params, ub, Modifier.PRIVATE);
-            }
+            setSharedPreToBean(params, ub);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
             return false;
@@ -112,15 +103,17 @@ public class SharedPreferencesUtil {
     public static boolean setToSharedPre(String name, SharedPreBean ub, int saveType) {
         Editor publicEdit = null;
         Editor privateEdit = null;
-        if (saveType != SAVE_PRIVATE) {
+        if (saveType != OPERATING_PRIVATE) {
             SharedPreferences sp = app.getSharedPreferences(name,
                     Context.MODE_PRIVATE);
             publicEdit = sp.edit();
         }
-        if (saveType != SAVE_PUBLIC) {
+        if (saveType != OPERATING_PUBLIC) {
             String privateName = ub.getPrivateSharePreFileName();
             if (!TextUtils.isEmpty(privateName)) {
                 privateEdit = app.getSharedPreferences(privateName, Context.MODE_PRIVATE).edit();
+            } else {
+                saveType = OPERATING_PUBLIC;
             }
         }
 
@@ -142,10 +135,25 @@ public class SharedPreferencesUtil {
 
         protected abstract String getPublicSharePreFileName();
 
+        public boolean initBean() {
+            String name = getPublicSharePreFileName();
+            if (!TextUtils.isEmpty(name)) {
+                boolean tem1=setToBean(name, this);
+                if(!TextUtils.isEmpty(name=getPrivateSharePreFileName())){
+                    boolean tem2=setToBean(name,this);
+                    if(tem1&&tem2){
+                        return true;
+                    }
+                }
+                return tem1 ;
+            }
+            return false;
+        }
+
         public boolean commitPublic() {
             String name = getPublicSharePreFileName();
             if (!TextUtils.isEmpty(name)) {
-                return setToSharedPre(name, this, SAVE_PUBLIC);
+                return setToSharedPre(name, this, OPERATING_PUBLIC);
             }
             return false;
         }
@@ -153,7 +161,7 @@ public class SharedPreferencesUtil {
         public boolean commitPrivate() {
             String name = getPrivateSharePreFileName();
             if (!TextUtils.isEmpty(name)) {
-                return setToSharedPre(name, this, SAVE_PRIVATE);
+                return setToSharedPre(name, this, OPERATING_PRIVATE);
             }
             return false;
         }
@@ -161,7 +169,7 @@ public class SharedPreferencesUtil {
         public boolean commit() {
             String name = getPublicSharePreFileName();
             if (!TextUtils.isEmpty(name)) {
-                return setToSharedPre(name, this, SAVE_ALL);
+                return setToSharedPre(name, this, OPERATING_ALL);
             }
             return false;
         }

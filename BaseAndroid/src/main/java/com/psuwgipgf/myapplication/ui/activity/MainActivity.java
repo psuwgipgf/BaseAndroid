@@ -8,6 +8,7 @@ import android.util.Printer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.psuwgipgf.myapplication.R;
@@ -37,12 +38,12 @@ public class MainActivity extends BaseActivity {
         Glide.with(this).load("http://i.imgur.com/DvpvklR.png").into(circleImageView);
         Glide.with(this).load("http://i.imgur.com/DvpvklR.png").into(image);
         UserBean user=new UserBean();
+        user.initBean();
+        Toast.makeText(this,user.name+"   "+user.getSex(),Toast.LENGTH_LONG).show();
         user.name="psuwgipgf";
-        user.password="123456";
-        user.setAge(10);
-        user.setSex("asdfasdf");
-        user.commitPrivate();
-        user.commitPublic();
+        user.setSex("asdf");
+        user.commit();
+
     }
 
     @OnClick(R.id.button2)
