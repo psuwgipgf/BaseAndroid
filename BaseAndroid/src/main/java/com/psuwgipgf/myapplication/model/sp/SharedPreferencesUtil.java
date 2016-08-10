@@ -35,6 +35,7 @@ public class SharedPreferencesUtil {
         for (Field f : arrField) {
             Type type = f.getGenericType();
             Object value = params.get(f.getName());
+            f.setAccessible(true);
             if (!params.containsKey(f.getName())) {
                 continue;
             }
