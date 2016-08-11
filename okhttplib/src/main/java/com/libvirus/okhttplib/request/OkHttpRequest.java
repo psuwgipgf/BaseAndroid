@@ -1,7 +1,5 @@
 package com.libvirus.okhttplib.request;
 
-import android.text.TextUtils;
-
 import com.libvirus.okhttplib.OkHttpManager;
 import com.libvirus.okhttplib.callback.CallResult;
 
@@ -27,28 +25,6 @@ public abstract class OkHttpRequest {
     public Map<String, String> mParams;
 
     protected abstract void build();
-    protected String buildUrl(){
-        if(TextUtils.isEmpty(url)){
-            throw new IllegalArgumentException("url not can Empty");
-        }
-        StringBuilder sb=new StringBuilder(host);
-        sb.append(url);
-        if(mParams==null){
-            return sb.toString();
-        }else{
-            if(!url.endsWith("?")){
-                sb.append("?");
-            }
-        }
-        for(String item:mParams.keySet()){
-            sb.append(item);
-            sb.append("=");
-            sb.append(mParams.get(item));
-            sb.append("&");
-        }
-        sb.deleteCharAt(sb.length()-1);
-        return sb.toString();
-    }
 
     public boolean cancel() {
         if (call != null && !call.isCanceled()) {

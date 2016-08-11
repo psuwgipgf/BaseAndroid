@@ -30,6 +30,7 @@ public class CookieHelper implements Interceptor {
 	}
 
 	private void showResponse(Response response) {
+		response.request();
 		if(mCookieOpter!=null){
 			String cookie = response.header("Set-Cookie");
 			mCookieOpter.saveCookie(cookie);

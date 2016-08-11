@@ -67,10 +67,6 @@ public class PostRequest extends OkHttpRequest {
 
         return this;
     }
-    private void setdsf(){
-//        mOkHttpClient.cookieJar();
-//        mOkHttpClient.networkInterceptors().removeAll();
-    }
 
     public PostRequest addParams(String key, List<String> p) {
         if (p != null) {
