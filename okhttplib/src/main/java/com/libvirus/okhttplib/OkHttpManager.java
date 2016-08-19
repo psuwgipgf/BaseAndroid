@@ -1,18 +1,19 @@
 package com.libvirus.okhttplib;
 
-import com.libvirus.okhttplib.request.GetRequest;
-import com.libvirus.okhttplib.request.PostFileRequest;
-import com.libvirus.okhttplib.request.PostRequest;
-import com.libvirus.okhttplib.utils.CookieHelper;
-import com.libvirus.okhttplib.utils.CookieInterface;
-import com.libvirus.okhttplib.utils.LogHelper;
-import com.libvirus.okhttplib.utils.OAuthInterceptor;
-
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
+
+import com.libvirus.okhttplib.request.GetRequest;
+import com.libvirus.okhttplib.request.PostFileRequest;
+import com.libvirus.okhttplib.request.PostJsonRequest;
+import com.libvirus.okhttplib.request.PostRequest;
+import com.libvirus.okhttplib.utils.CookieHelper;
+import com.libvirus.okhttplib.utils.CookieInterface;
+import com.libvirus.okhttplib.utils.LogHelper;
+import com.libvirus.okhttplib.utils.OAuthInterceptor;
 
 /**
  * Created by psu on 2016/4/9.
@@ -64,8 +65,8 @@ public class OkHttpManager {
 				.addNetworkInterceptor(mCookieHelper).build();
 		return this;
 	}
-	public OkHttpManager setOAuth(CookieInterface cookie) {
-		OAuthInterceptor oAuth=new OAuthInterceptor(cookie);
+	public OkHttpManager setOAuth() {
+		OAuthInterceptor oAuth=new OAuthInterceptor();
 		mOkHttpClient = getOkHttpClient().newBuilder()
 				.addInterceptor(oAuth).build();
 		return this;
@@ -111,5 +112,8 @@ public class OkHttpManager {
 
 	public static PostFileRequest postFileRequest() {
 		return new PostFileRequest();
+	}
+	public static PostJsonRequest postJsonRequest() {
+		return new PostJsonRequest();
 	}
 }
