@@ -116,4 +116,7 @@ public class OkHttpManager {
 	public static PostJsonRequest postJsonRequest() {
 		return new PostJsonRequest();
 	}
+	public static DeleteRequest deleteRequest() {
+		return new DeleteRequest();
+	}
 }
