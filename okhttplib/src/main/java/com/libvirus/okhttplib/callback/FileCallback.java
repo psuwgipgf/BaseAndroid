@@ -40,11 +40,11 @@ public abstract class FileCallback extends CallResult {
 		try {
 			is = resp.body().byteStream();
 			byte[] buf = new byte[2048];
-			file = new File(fileName);
+			file = new File(path);
 			if (!file.exists()) {
 				return false;
 			}
-			fos = new FileOutputStream(file);
+			fos = new FileOutputStream(new File(path + "/" + fileName));
 			int len = 0;
 			double factor = Float.parseFloat(resp.header("Content-Length"));
 			double conutLength = 0;
