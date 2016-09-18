@@ -27,9 +27,9 @@ public abstract class FileCallback extends CallResult {
 		}
 	}
 
-	abstract void result(File file);
+	public abstract void result(File file);
 
-	abstract void progress(int p);
+	public abstract void progress(int p);
 
 	private boolean downLoad(Response resp, String path, String fileName) {
 		if (resp == null) {

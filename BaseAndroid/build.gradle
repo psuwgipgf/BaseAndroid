@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '24.0.0'
-
+    compileSdkVersion 24
+    buildToolsVersion '24'
     defaultConfig {
         applicationId "com.psuwgipgf.myapplication"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -17,10 +16,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -28,8 +29,8 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okio:okio:1.6.0'
-//    compile 'com.libvirus.okhttplib:okhttplib:1.0.0'
-    compile project (':okhttplib')
+    //    compile 'com.libvirus.okhttplib:okhttplib:1.0.0'
+    compile project(':okhttplib')
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
 }

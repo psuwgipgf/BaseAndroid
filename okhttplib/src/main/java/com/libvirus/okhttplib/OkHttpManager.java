@@ -1,11 +1,6 @@
 package com.libvirus.okhttplib;
 
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.Call;
-import okhttp3.Dispatcher;
-import okhttp3.OkHttpClient;
-
+import com.libvirus.okhttplib.request.DeleteRequest;
 import com.libvirus.okhttplib.request.GetRequest;
 import com.libvirus.okhttplib.request.PostFileRequest;
 import com.libvirus.okhttplib.request.PostJsonRequest;
@@ -14,6 +9,12 @@ import com.libvirus.okhttplib.utils.CookieHelper;
 import com.libvirus.okhttplib.utils.CookieInterface;
 import com.libvirus.okhttplib.utils.LogHelper;
 import com.libvirus.okhttplib.utils.OAuthInterceptor;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.Dispatcher;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by psu on 2016/4/9.

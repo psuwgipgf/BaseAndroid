@@ -31,4 +31,9 @@ public class Main2Activity extends BaseActivity {
     public void OnCliek(View v){
         RxBus.send(new RxBusType(RxBusType.QUIT));
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }

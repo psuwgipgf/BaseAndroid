@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.util.Printer;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,18 +16,21 @@ import com.psuwgipgf.myapplication.R;
 import com.psuwgipgf.myapplication.bean.UserBean;
 import com.psuwgipgf.myapplication.presenter.MainActivityPresenter;
 import com.psuwgipgf.myapplication.ui.view.CircleImageView;
+
+import java.lang.reflect.Proxy;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.text)
-    public TextView text;
     @Bind(R.id.image)
     public ImageView image;
     @Bind(R.id.circleImage)
     public CircleImageView circleImageView;
+    @Bind(R.id.text)
+    public TextView text;
 
     private MainActivityPresenter maPresenter = new MainActivityPresenter();
 
@@ -41,24 +45,20 @@ public class MainActivity extends BaseActivity {
         user.initBean();
         Toast.makeText(this,user.name+"   "+user.getSex(),Toast.LENGTH_LONG).show();
         user.name="psuwgipgf";
-        user.setSex("asdf");
+        user.setSex("磊大碕在夺工桍花样百出地");
         user.commit();
+        text.setError("asdfasdf");
+//        PhoneWindows
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @OnClick(R.id.button2)
-    public void onClick(View v) {
-        maPresenter.setTextView(text);
-    }
-
-    @OnClick(R.id.button1)
     public void onClick1(View v) {
         startActivity(new Intent(this, Main2Activity.class));
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        sendBroadcast(new Intent("Main2Activity"));
-    }
 }

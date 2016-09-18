@@ -20,8 +20,18 @@ public class OAuthInterceptor implements Interceptor {
     private static OkHttpClient OAuth = new OkHttpClient();
     private CookieInterface cookie;
 
-    public OAuthInterceptor(CookieInterface c) {
-        cookie = c;
+    public OAuthInterceptor() {
+        cookie = new CookieInterface() {
+            @Override
+            public String getCookie() {
+                return null;
+            }
+
+            @Override
+            public void saveCookie(String cookie) {
+
+            }
+        };
     }
 
     @Override

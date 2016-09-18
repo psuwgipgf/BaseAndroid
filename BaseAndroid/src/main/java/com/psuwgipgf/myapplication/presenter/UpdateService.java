@@ -1,15 +1,5 @@
-package com.jzhubao.www.android.presenter;
+package com.psuwgipgf.myapplication.presenter;
 
-import java.io.File;
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import android.app.Notification;
 import android.app.Notification.Builder;
 import android.app.NotificationManager;
@@ -20,10 +10,19 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.text.TextUtils;
 
-import com.jzhubao.www.android.R;
-import com.jzhubao.www.android.util.ToastUtil;
 import com.libvirus.okhttplib.OkHttpManager;
 import com.libvirus.okhttplib.callback.FileCallback;
+import com.psuwgipgf.myapplication.R;
+
+import java.io.File;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.schedulers.Schedulers;
 
 public class UpdateService extends Service {
 
