@@ -5,7 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidAPP.iml" filepath="$PROJECT_DIR$/AndroidAPP.iml" />
       <module fileurl="file://$PROJECT_DIR$/BaseAndroid/BaseAndroid.iml" filepath="$PROJECT_DIR$/BaseAndroid/BaseAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/RxBus/RxBus.iml" filepath="$PROJECT_DIR$/RxBus/RxBus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/okhttplib/okhttplib.iml" filepath="$PROJECT_DIR$/okhttplib/okhttplib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>
   </component>
 </project>
