@@ -65,14 +65,15 @@ public class SharedPreferencesUtil {
             Type type = f.getGenericType();
             Object value = f.get(bean);
             if (value == null) {
-                continue;
-            }
-            if (type.toString().equals("class java.lang.String")) {
-                edit.putString(f.getName(), value.toString());
-            } else if (type.toString().equals("int")) {
-                edit.putInt(f.getName(), (int) value);
-            } else if (type.toString().equals("boolean")) {
-                edit.putBoolean(f.getName(), (boolean) value);
+                edit.remove(f.getName());
+            }else{
+                if (type.toString().equals("class java.lang.String")) {
+                    edit.putString(f.getName(), value.toString());
+                } else if (type.toString().equals("int")) {
+                    edit.putInt(f.getName(), (int) value);
+                } else if (type.toString().equals("boolean")) {
+                    edit.putBoolean(f.getName(), (boolean) value);
+                }
             }
         }
         if (PublicEdit != null) {
