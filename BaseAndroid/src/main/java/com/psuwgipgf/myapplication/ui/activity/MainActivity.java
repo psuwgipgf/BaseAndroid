@@ -40,14 +40,15 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         Glide.with(this).load("http://i.imgur.com/DvpvklR.png").into(circleImageView);
-        Glide.with(this).load("http://i.imgur.com/DvpvklR.png").into(image);
+        Glide.with(this).load("http://i.imgur.com/DvpvklR.png").into( image);
         UserBean user=new UserBean();
         user.initBean();
         Toast.makeText(this,user.name+"   "+user.getSex(),Toast.LENGTH_LONG).show();
         user.name="psuwgipgf";
         user.setSex("磊大碕在夺工桍花样百出地");
         user.commit();
-        text.setError("asdfasdf");
+//        Looper.loop();
+//        text.setError("asdfasdf");
 //        PhoneWindows
     }
 
@@ -58,7 +59,8 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.button2)
     public void onClick1(View v) {
-        startActivity(new Intent(this, Main2Activity.class));
+//        startActivity(new Intent(this, Main2Activity.class));
+        Toast.makeText(this,"asdfasdf",Toast.LENGTH_LONG).show();
     }
 
 }

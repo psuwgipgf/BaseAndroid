@@ -1,1 +1,1 @@
-include ':RxBus', ':BaseAndroid', ':okhttplib', ':app', ':test'
+include ':BaseAndroid'

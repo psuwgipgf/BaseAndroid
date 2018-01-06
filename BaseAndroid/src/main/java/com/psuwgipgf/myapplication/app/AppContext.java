@@ -14,6 +14,5 @@ public class AppContext extends Application {
         super.onCreate();
         LeakCanary.install(this);//内存泄露检测
         ModelManager.initModelManager(this);
-
     }
 }
