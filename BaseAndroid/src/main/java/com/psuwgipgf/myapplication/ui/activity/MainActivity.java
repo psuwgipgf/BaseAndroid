@@ -2,11 +2,7 @@ package com.psuwgipgf.myapplication.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Looper;
-import android.util.Log;
-import android.util.Printer;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,19 +13,19 @@ import com.psuwgipgf.myapplication.bean.UserBean;
 import com.psuwgipgf.myapplication.presenter.MainActivityPresenter;
 import com.psuwgipgf.myapplication.ui.view.CircleImageView;
 
-import java.lang.reflect.Proxy;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+;
+
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.image)
+    @BindView(R.id.image)
     public ImageView image;
-    @Bind(R.id.circleImage)
+    @BindView(R.id.circleImage)
     public CircleImageView circleImageView;
-    @Bind(R.id.text)
+    @BindView(R.id.text)
     public TextView text;
 
     private MainActivityPresenter maPresenter = new MainActivityPresenter();
@@ -59,8 +55,8 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.button2)
     public void onClick1(View v) {
-//        startActivity(new Intent(this, Main2Activity.class));
-        Toast.makeText(this,"asdfasdf",Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, Main2Activity.class));
+//        Toast.makeText(this,"asdfasdf",Toast.LENGTH_LONG).show();
     }
 
 }

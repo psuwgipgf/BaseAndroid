@@ -15,6 +15,6 @@ public class GlideConfig {
 	}
 
 	public static void load(Context c, String url, ImageView view) {
-		Glide.with(c).load(url).asBitmap().into(view);
+		Glide.with(c).load(url).into(view);
 	}
 }
