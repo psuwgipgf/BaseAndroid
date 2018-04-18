@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BaseApp</string>
+    <string name="True_button">真的</string>
+    <string name="False_button">假的</string>
+</resources>

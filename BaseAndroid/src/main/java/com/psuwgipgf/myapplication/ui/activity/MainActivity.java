@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.button2)
     public void onClick1(View v) {
-        startActivity(new Intent(this, Main2Activity.class));
+        startActivity(new Intent(this, QuizActivity.class));
 //        Toast.makeText(this,"asdfasdf",Toast.LENGTH_LONG).show();
     }
 
